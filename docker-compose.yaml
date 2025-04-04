@@ -1,0 +1,47 @@
+services:
+  prestashop:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_SERVER: db
+      DB_USER: user
+      DB_PASSWD: password
+      DB_NAME: prestashop
+    networks:
+      - ps-network
+    volumes:
+      - ps-volume:/var/www/html
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    networks:
+      - ps-network
+      - db-network
+    volumes:
+      - db-volume:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "3307:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PMA_PMADB: phpmyadmin
+    networks:
+      - db-network
+
+networks:
+  ps-network:
+  db-network:
+
+volumes:
+  ps-volume:
+  db-volume:
