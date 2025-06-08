@@ -28,4 +28,4 @@ jobs:
           context: ./backup
           file: ./backup/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/prestashop:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/mysql-backup:latest
