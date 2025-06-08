@@ -2,4 +2,5 @@
 .github
 .gitignore
 backup/Dockerfile
+secrets
 .dockerignore

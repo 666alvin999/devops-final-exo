@@ -122,14 +122,12 @@ services:
     networks:
       - monitoring-network
 
-
   backup:
     build:
       context: ./backup
       dockerfile: Dockerfile
     container_name: mysql-backup
     volumes:
-      - db-volume:/data/db
       - backup-volume:/backup
     secrets:
       - mysql_root_password
